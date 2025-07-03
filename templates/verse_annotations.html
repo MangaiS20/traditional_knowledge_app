@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>View Verse Annotations</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: #f9fbe7;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .container {
+      margin-top: 40px;
+      max-width: 900px;
+    }
+    .card {
+      margin-bottom: 20px;
+      border-left: 5px solid #81c784;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .annotation-line {
+      background-color: #f1f8e9;
+      padding: 8px;
+      margin-bottom: 5px;
+      border-radius: 6px;
+    }
+    .delete-btn {
+      float: right;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h3 class="text-center mb-4">Verse Annotations</h3>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  {% for ann in annotations %}
+    <div class="card p-3">
+      <div class="d-flex justify-content-between">
+        <h5>{{ ann.title }} <small class="text-muted">({{ ann.script_type or "None" }})</small></h5>
+        <form action="{{ url_for('delete_annotation', id=ann.id) }}" method="POST" onsubmit="return confirm('Delete this annotation?')">
+          <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+        </form>
+      </div>
+      <hr>
+      {% if ann.annotations %}
+        {% for line, note in ann.annotations.items() %}
+          <div class="annotation-line">
+            <strong>{{ line }}</strong><br>
+            <small class="text-muted">{{ note }}</small>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p class="text-muted">No annotation details found.</p>
+      {% endif %}
+    </div>
+  {% else %}
+    <p class="text-center text-muted">No annotations available yet.</p>
+  {% endfor %}
+
+  <div class="text-center mt-4">
+    <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">Back to Home</a>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Link OCR Image to Text</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f4f8ff;
+        }
+        .container {
+            max-width: 800px;
+            margin-top: 40px;
+        }
+        .record-box {
+            border: 1px solid #ccc;
+            border-left: 5px solid #4CAF50;
+            padding: 15px;
+            margin-bottom: 20px;
+            background: white;
+            border-radius: 10px;
+        }
+        .btn-upload {
+            width: 100%;
+        }
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h3 class="mb-4 text-center">Link OCR Image to Text</h3>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- Upload Form -->
+    <form method="POST" enctype="multipart/form-data" class="mb-4">
+        <div class="mb-3">
+            <label class="form-label">Select Text Record</label>
+            <select name="record_id" class="form-select" required>
+                <option value="">-- Choose a record --</option>
+                {% for record in records %}
+                    <option value="{{ record.id }}">{{ record.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Upload Image</label>
+            <input type="file" name="image" class="form-control" accept="image/*" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-upload">Upload & Link</button>
+    </form>
+
+    <!-- Display Linked Records -->
+    {% for record in records %}
+        <div class="record-box">
+            <h5><strong>{{ record.title }}</strong></h5>
+            {% if record.ocr_text %}
+                <p class="text-success">✅ OCR Linked:</p>
+                <pre>{{ record.ocr_text }}</pre>
+            {% else %}
+                <p class="text-muted">No OCR linked yet.</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">Back to Home</a>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

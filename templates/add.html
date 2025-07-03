@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Text | Traditional Knowledge</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #fefcea, #f1daff);
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .form-container {
+            max-width: 800px;
+            margin: 60px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .btn {
+            border-radius: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="form-container">
+        <h3 class="text-center mb-4">Submit New Traditional Text</h3>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label">Title</label>
+                <input type="text" name="title" class="form-control" required placeholder="Enter title">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Author</label>
+                <input type="text" name="author" class="form-control" required placeholder="Enter author name">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Century</label>
+                <input type="text" name="century" class="form-control" placeholder="e.g., 5th Century BCE">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Genre</label>
+                <input type="text" name="genre" class="form-control" placeholder="e.g., Epic, Philosophy">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Keywords</label>
+                <input type="text" name="keywords" class="form-control" placeholder="e.g., dharma, karma">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Devanagari Text</label>
+                <textarea name="devanagari_text" class="form-control" rows="4" required placeholder="Enter Devanagari script text"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Romanized Text</label>
+                <textarea name="roman_text" class="form-control" rows="4" required placeholder="Enter Roman transliteration"></textarea>
+            </div>
+
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Submit for Approval</button>
+                <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">Back to Home</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

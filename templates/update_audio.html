@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Update Audio Links</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to right, #fdfbfb, #ebedee);
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .container {
+      margin-top: 40px;
+    }
+    .card {
+      margin-bottom: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+    .btn-rounded {
+      border-radius: 30px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2 class="text-center mb-4">Update Audio Links</h2>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  {% for audio in audio_links %}
+    <form method="POST" enctype="multipart/form-data">
+      <div class="card">
+        <input type="hidden" name="audio_id" value="{{ audio.id }}">
+        <h5 class="mb-3">Linked to: <strong>{{ audio.title }}</strong></h5>
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label>Start Time</label>
+            <input type="text" class="form-control" name="start_time" value="{{ audio.start_time }}">
+          </div>
+          <div class="col-md-6">
+            <label>End Time</label>
+            <input type="text" class="form-control" name="end_time" value="{{ audio.end_time }}">
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label>Description</label>
+          <textarea name="audio_description" class="form-control" rows="2">{{ audio.audio_description }}</textarea>
+        </div>
+
+        <div class="mb-3">
+          <label>Replace Audio File (optional)</label>
+          <input type="file" name="audio" class="form-control">
+        </div>
+
+        {% if audio.file_path %}
+        <div class="mb-2">
+          <label>Current Audio:</label><br>
+          <audio controls>
+            <source src="{{ url_for('static', filename=audio.file_path.split('static/')[-1]) }}" type="audio/mpeg">
+            Your browser does not support audio playback.
+          </audio>
+        </div>
+        {% endif %}
+
+        <div class="text-end">
+          <button type="submit" class="btn btn-primary btn-rounded">Update</button>
+        </div>
+      </div>
+    </form>
+  {% endfor %}
+
+  <div class="text-center mt-4">
+    <a href="{{ url_for('index') }}" class="btn btn-secondary btn-rounded">Back to Home</a>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+-

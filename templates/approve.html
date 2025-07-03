@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Approve Records | Admin Panel</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to right, #e3f2fd, #fff3e0);
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .container {
+      margin-top: 50px;
+    }
+    .card {
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .btn-approve {
+      background-color: #43a047;
+      color: white;
+    }
+    .btn-approve:hover {
+      background-color: #2e7d32;
+    }
+    .btn-reject {
+      background-color: #e53935;
+      color: white;
+    }
+    .btn-reject:hover {
+      background-color: #b71c1c;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2 class="text-center mb-4">Pending User Records for Approval</h2>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  {% if records %}
+    {% for record in records %}
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ record.title }}</h5>
+          <p class="card-text">
+            <strong>Author:</strong> {{ record.author }}<br>
+            <strong>Century:</strong> {{ record.century }}<br>
+            <strong>Genre:</strong> {{ record.genre }}<br>
+            <strong>Keywords:</strong> {{ record.keywords }}<br>
+            <strong>Devanagari Text:</strong> {{ record.devanagari_text }}<br>
+            <strong>Roman Text:</strong> {{ record.roman_text }}
+          </p>
+          <form method="POST" class="d-inline">
+            <input type="hidden" name="id" value="{{ record.id }}">
+            <button type="submit" name="action" value="approve" class="btn btn-approve">Approve</button>
+          </form>
+          <form method="POST" class="d-inline">
+            <input type="hidden" name="id" value="{{ record.id }}">
+            <button type="submit" name="action" value="reject" class="btn btn-reject">Reject</button>
+          </form>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p class="text-center">No pending records for approval.</p>
+  {% endif %}
+
+  <div class="text-center mt-4">
+    <a href="{{ url_for('index') }}" class="btn btn-secondary">Back to Home</a>
+  </div>
+</div>
+
+</body>
+</html>

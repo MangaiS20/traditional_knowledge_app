@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verify Extracted Metadata</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f3f4f6;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        textarea {
+            resize: vertical;
+        }
+        .btn-rounded {
+            border-radius: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h3 class="mb-4 text-center">Verify & Confirm Metadata</h3>
+    <form method="POST" action="{{ url_for('add') }}">
+        <div class="mb-3">
+            <label>Title</label>
+            <input type="text" name="title" class="form-control" value="{{ data.title or '' }}" required>
+        </div>
+        <div class="mb-3">
+            <label>Author</label>
+            <input type="text" name="author" class="form-control" value="{{ data.author or '' }}">
+        </div>
+        <div class="mb-3">
+            <label>Century</label>
+            <input type="text" name="century" class="form-control" value="{{ data.century or '' }}">
+        </div>
+        <div class="mb-3">
+            <label>Genre</label>
+            <input type="text" name="genre" class="form-control" value="{{ data.genre or '' }}">
+        </div>
+        <div class="mb-3">
+            <label>Keywords</label>
+            <textarea name="keywords" class="form-control" rows="2">{{ data.keywords or '' }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label>Devanagari Text (Preview)</label>
+            <textarea name="devanagari_text" class="form-control" rows="4">{{ data.devanagari_text or '' }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label>Romanized Text (Preview)</label>
+            <textarea name="roman_text" class="form-control" rows="4">{{ data.roman_text or '' }}</textarea>
+        </div>
+
+        <div class="d-grid gap-2 mt-4">
+            <button type="submit" class="btn btn-success btn-rounded">Submit for Approval</button>
+            <a href="{{ url_for('index') }}" class="btn btn-outline-secondary btn-rounded">Back to Home</a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload for Metadata Extraction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container mt-5 bg-white p-4 rounded shadow">
+    <h3 class="text-center mb-4">Upload Manuscript Image/PDF </h3>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".pdf,image/*" class="form-control mb-3" required>
+        <button type="submit" class="btn btn-primary w-100">Extract Metadata</button>
+    </form>
+    <div class="text-center mt-3">
+        <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">Back to Home</a>
+    </div>
+
+
+</div>
+</body>
+</html>
