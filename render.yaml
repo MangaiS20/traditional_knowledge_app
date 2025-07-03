@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: traditional-knowledge-app
+    runtime: python
+    buildCommand: ""
+    startCommand: gunicorn app:app
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: DB_HOST
+        value: your_mysql_host
+      - key: DB_USER
+        value: root
+      - key: DB_PASSWORD
+        value: your_mysql_password
+      - key: DB_NAME
+        value: traditional_knowledge
+      - key: MONGO_URI
+        value: your_mongodb_atlas_url
