@@ -1,65 +1,65 @@
-# Traditional Knowledge Database with Multilingual OCR Annotation
+# Traditional Knowledge Archive System with Multilingual OCR Annotation
 
-A Flask-based web application for preserving, managing, and retrieving traditional knowledge manuscripts using **Optical Character Recognition (OCR)** and a hybrid database architecture with **MySQL** and **MongoDB**.
+A Flask-based web application for preserving, managing, and retrieving traditional knowledge manuscripts using **Optical Character Recognition (OCR)** and a hybrid database architecture powered by **MySQL** and **MongoDB**.
 
 ---
 
 ## Project Overview
 
-Traditional knowledge manuscripts often exist as handwritten or printed documents that are difficult to digitize, search, and preserve. This project provides a web-based platform that enables users to digitize, annotate, store, and retrieve multilingual traditional knowledge documents efficiently.
+Traditional knowledge manuscripts contain valuable cultural and historical information but are often stored as handwritten or printed documents, making them difficult to preserve, search, and manage digitally.
 
-The application integrates **Tesseract OCR** to extract text from manuscript images and supports **English**, **Tamil**, and **Sanskrit** languages.
+This project provides a web-based platform for digitizing, annotating, storing, and retrieving multilingual traditional knowledge manuscripts. It integrates **Tesseract OCR** for text extraction and supports **English**, **Tamil**, and **Sanskrit** languages.
 
-A hybrid database architecture is adopted:
+A hybrid database approach is used to efficiently manage both structured manuscript metadata and OCR annotation data.
 
-- **MySQL** stores structured manuscript metadata.
-- **MongoDB** stores OCR annotation data.
+- **MySQL** – Stores structured manuscript records.
+- **MongoDB** – Stores OCR annotation data.
 
 ---
 
 ## Key Features
 
 - Secure role-based authentication (Admin & User)
-- Add and manage traditional knowledge records
+- Traditional knowledge record management
 - OCR-based manuscript text extraction
 - Multilingual OCR support
 - Advanced search by title and author
-- Approval workflow for submitted manuscripts
-- Update and delete records (Admin)
-- Responsive Bootstrap user interface
+- Admin approval workflow
+- Update and delete records
 - Hybrid database architecture (MySQL + MongoDB)
+- Responsive Bootstrap-based user interface
 
 ---
 
 ## System Architecture
 
 ```
-User
+                 User
+                   │
+                   ▼
+        Flask Web Application
+                   │
+      ┌────────────┴────────────┐
+      ▼                         ▼
+ Tesseract OCR             MySQL Database
+      │                         │
+      ▼                         ▼
+ MongoDB (OCR Data)     Manuscript Metadata
       │
       ▼
-Flask Web Application
-      │
-      ├──────────────┐
-      ▼              ▼
-Tesseract OCR     MySQL Database
-      │              │
-      ▼              ▼
-MongoDB (OCR Annotations)
-      │
-      ▼
-Search & Retrieval
+ Search & Retrieval
 ```
 
 ---
 
 ## OCR Workflow
 
-1. Upload manuscript image.
-2. Select OCR language (English, Tamil, or Sanskrit).
+1. Upload a manuscript image.
+2. Select the OCR language (English, Tamil, or Sanskrit).
 3. Extract text using Tesseract OCR.
-4. Store manuscript metadata in MySQL.
+4. Store manuscript information in MySQL.
 5. Store OCR annotations in MongoDB.
-6. Retrieve and search manuscripts through the web interface.
+6. Search and retrieve manuscripts through the web interface.
 
 ---
 
@@ -67,11 +67,12 @@ Search & Retrieval
 
 | Category | Technologies |
 |----------|--------------|
-| Backend | Flask, Python |
-| Database | MySQL, MongoDB |
+| Programming Language | Python |
+| Backend | Flask |
+| Frontend | HTML5, CSS3, Bootstrap 5 |
 | OCR | Tesseract OCR, PyTesseract |
 | Image Processing | Pillow |
-| Frontend | HTML5, CSS3, Bootstrap 5 |
+| Database | MySQL, MongoDB |
 
 ---
 
@@ -90,24 +91,17 @@ traditional_knowledge_app
 │
 ├── app.py
 ├── requirements.txt
+├── render.yaml
 ├── README.md
-├── templates/
+│
 ├── static/
+├── templates/
 ├── uploads/
-└── database/
+├── database/
+│   └── README.md
+│
+└── sanskrit_dict.json
 ```
-
----
-
-## Screenshots
-
-> Add screenshots of the following pages:
-
-- Home Page
-- Login Page
-- OCR Annotation Page
-- Search Page
-- Admin Dashboard
 
 ---
 
@@ -119,22 +113,45 @@ Clone the repository:
 git clone https://github.com/MangaiS20/traditional_knowledge_app.git
 ```
 
-Move into the project directory:
+Navigate to the project directory:
 
 ```bash
 cd traditional_knowledge_app
 ```
 
-Install dependencies:
+Install the required packages:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run the application:
+---
+
+## Prerequisites
+
+Before running the application, install the following:
+
+- Python 3.x
+- Tesseract OCR
+- MySQL
+- MongoDB
+
+Ensure that **Tesseract OCR** is installed and configured in your system PATH.
+
+---
+
+## Usage
+
+Run the Flask application:
 
 ```bash
 python app.py
+```
+
+Open your browser and visit:
+
+```
+http://127.0.0.1:5000
 ```
 
 ---
@@ -167,10 +184,14 @@ It demonstrates the integration of Optical Character Recognition (OCR), multilin
 
 **M.Sc. Data Science**
 
-SASTRA Deemed To Be University
+SASTRA Deemed to be University
 
-Python | Flask | OCR | MySQL | MongoDB | Data Science
+**Python | Flask | OCR | MySQL | MongoDB | Data Science**
 
-📧 Email: **mangaiofficial20@gmail.com**
+📧 **Email:** mangaiofficial20@gmail.com
 
-💼 LinkedIn: **https://www.linkedin.com/in/mangais20**
+💼 **LinkedIn:** https://www.linkedin.com/in/mangais20
+
+---
+
+⭐ If you find this project useful, consider giving it a star.
