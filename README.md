@@ -17,6 +17,17 @@ A hybrid database approach is used to efficiently manage both structured manuscr
 
 ---
 
+## Project Highlights
+
+- 🌍 Multilingual OCR support (English, Tamil, Sanskrit)
+- 📄 OCR-based manuscript digitization using Tesseract
+- 🗄️ Hybrid database architecture (MySQL + MongoDB)
+- 🔐 Secure role-based authentication
+- 🔎 Advanced manuscript search and retrieval
+- 🌐 Responsive web interface built with Flask and Bootstrap
+
+---
+
 ## Key Features
 
 - Secure role-based authentication (Admin & User)
