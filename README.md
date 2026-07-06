@@ -155,7 +155,9 @@ python app.py
 
 This project was developed as part of the **Active Learning 2025 Internship** under the **Database Design and Retrieval Systems** theme.
 
-The project demonstrates the integration of OCR, multilingual text processing, relational and NoSQL databases, and web application development for preserving traditional knowledge manuscripts.
+The project was carried out under the guidance of **Dr. B. Santhi**, **Dean, Srinivasa Ramanujan Centre (SRC), SASTRA Deemed to be University**.
+
+It demonstrates the integration of Optical Character Recognition (OCR), multilingual text processing, relational and NoSQL databases, and web application development for preserving and managing traditional knowledge manuscripts.
 
 ---
 
